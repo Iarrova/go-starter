@@ -35,21 +35,7 @@ func init() {
 	// postDescTitle is the schema descriptor for title field.
 	postDescTitle := postFields[1].Descriptor()
 	// post.TitleValidator is a validator for the "title" field. It is called by the builders before save.
-	post.TitleValidator = func() func(string) error {
-		validators := postDescTitle.Validators
-		fns := [...]func(string) error{
-			validators[0].(func(string) error),
-			validators[1].(func(string) error),
-		}
-		return func(title string) error {
-			for _, fn := range fns {
-				if err := fn(title); err != nil {
-					return err
-				}
-			}
-			return nil
-		}
-	}()
+	post.TitleValidator = postDescTitle.Validators[0].(func(string) error)
 	// postDescBody is the schema descriptor for body field.
 	postDescBody := postFields[2].Descriptor()
 	// post.BodyValidator is a validator for the "body" field. It is called by the builders before save.
@@ -86,21 +72,7 @@ func init() {
 	// userDescName is the schema descriptor for name field.
 	userDescName := userFields[2].Descriptor()
 	// user.NameValidator is a validator for the "name" field. It is called by the builders before save.
-	user.NameValidator = func() func(string) error {
-		validators := userDescName.Validators
-		fns := [...]func(string) error{
-			validators[0].(func(string) error),
-			validators[1].(func(string) error),
-		}
-		return func(name string) error {
-			for _, fn := range fns {
-				if err := fn(name); err != nil {
-					return err
-				}
-			}
-			return nil
-		}
-	}()
+	user.NameValidator = userDescName.Validators[0].(func(string) error)
 	// userDescID is the schema descriptor for id field.
 	userDescID := userMixinFields0[0].Descriptor()
 	// user.DefaultID holds the default value on creation for the id field.

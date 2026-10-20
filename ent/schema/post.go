@@ -28,8 +28,7 @@ func (Post) Fields() []ent.Field {
 			Immutable(),
 
 		field.String("title").
-			NotEmpty().
-			MaxLen(200),
+			NotEmpty(),
 
 		field.Text("body").
 			NotEmpty(),
@@ -49,7 +48,7 @@ func (Post) Edges() []ent.Edge {
 
 func (Post) Indexes() []ent.Index {
 	return []ent.Index{
-		index.Fields("user_id", "created_at"),
+		index.Fields("user_id", "id"),
 	}
 }
 

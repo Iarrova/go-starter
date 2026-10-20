@@ -31,8 +31,7 @@ func (User) Fields() []ent.Field {
 			Sensitive(),
 
 		field.String("name").
-			NotEmpty().
-			MaxLen(200),
+			NotEmpty(),
 	}
 }
 

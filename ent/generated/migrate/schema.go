@@ -14,7 +14,7 @@ var (
 		{Name: "id", Type: field.TypeUUID},
 		{Name: "created_at", Type: field.TypeTime, Default: "CURRENT_TIMESTAMP"},
 		{Name: "updated_at", Type: field.TypeTime, Default: "CURRENT_TIMESTAMP"},
-		{Name: "title", Type: field.TypeString, Size: 200},
+		{Name: "title", Type: field.TypeString},
 		{Name: "body", Type: field.TypeString, Size: 2147483647},
 		{Name: "user_id", Type: field.TypeUUID},
 	}
@@ -33,9 +33,9 @@ var (
 		},
 		Indexes: []*schema.Index{
 			{
-				Name:    "post_user_id_created_at",
+				Name:    "post_user_id_id",
 				Unique:  false,
-				Columns: []*schema.Column{PostsColumns[5], PostsColumns[1]},
+				Columns: []*schema.Column{PostsColumns[5], PostsColumns[0]},
 			},
 		},
 	}
@@ -46,7 +46,7 @@ var (
 		{Name: "updated_at", Type: field.TypeTime, Default: "CURRENT_TIMESTAMP"},
 		{Name: "email", Type: field.TypeString, Unique: true},
 		{Name: "password_hash", Type: field.TypeString},
-		{Name: "name", Type: field.TypeString, Size: 200},
+		{Name: "name", Type: field.TypeString},
 	}
 	// UsersTable holds the schema information for the "users" table.
 	UsersTable = &schema.Table{
